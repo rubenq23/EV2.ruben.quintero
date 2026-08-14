@@ -60,6 +60,12 @@
                 </div>
 
                 <form id="registroForm">
+                    <!-- NUEVO CAMPO: Nombre -->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="nombre" placeholder="Tu Nombre" required>
+                        <label for="nombre" class="text-secondary">Nombre completo</label>
+                    </div>
+
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control" id="correo" placeholder="nombre@ejemplo.com" required>
                         <label for="correo" class="text-secondary">Correo electrónico</label>
@@ -97,6 +103,8 @@
         btnText.textContent = 'Creando usuario...';
         btnSpinner.classList.remove('d-none');
 
+        // Capturamos el nuevo campo
+        const nombre = document.getElementById('nombre').value;
         const correo = document.getElementById('correo').value;
         const clave = document.getElementById('clave').value;
 
@@ -104,7 +112,8 @@
             const response = await fetch('/api/auth/registro', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ correo, clave })
+                // Enviamos el nombre en el JSON
+                body: JSON.stringify({ nombre, correo, clave })
             });
 
             if(response.ok) {
