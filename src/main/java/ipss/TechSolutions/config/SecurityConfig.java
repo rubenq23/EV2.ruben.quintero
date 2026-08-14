@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/health").permitAll()  // Health check público
                         .requestMatchers("/api/auth/**").permitAll() // Deja público todo lo que empiece con /api/auth/ (Registro y Login)
+                        .requestMatchers("/login", "/registro").permitAll() // Permite a cualquier persona ver las pantallas de login y registro.
                         .anyRequest().authenticated()                // Exige autenticación para cualquier otra ruta futura
                 )
 
